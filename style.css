@@ -5,3 +5,10 @@ body {
     height: 100vh;
     margin: 0;
 }
+
+.calculator {
+    background-color: rgb(63, 63, 63);
+    border: 10px solid gray;
+    border-radius: 5px;
+    padding: 5px;
+}

@@ -12,3 +12,9 @@ body {
     border-radius: 5px;
     padding: 5px;
 }
+
+.display {
+    background-color: lightgray;
+    padding: 5px;
+    margin-bottom: 10px;
+}

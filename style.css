@@ -38,6 +38,10 @@ button {
     border-radius: 5px;
 }
 
+button:hover {
+    opacity: 90%;
+}
+
 #zero {
     flex: 1 50%;
 }

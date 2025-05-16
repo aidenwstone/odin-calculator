@@ -19,3 +19,16 @@ body {
     padding: 5px;
     margin-bottom: 10px;
 }
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+button {
+    flex: 1 25%;
+}
+
+#zero {
+    flex: 1 50%;
+}

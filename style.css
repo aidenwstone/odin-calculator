@@ -11,13 +11,17 @@ body {
     border: 10px solid gray;
     border-radius: 5px;
     padding: 5px;
-    width: 400px;
+    width: 300px;
+    min-width: 300px;
 }
 
 .display {
     background-color: lightgray;
     padding: 5px;
     margin-bottom: 10px;
+    font-family: monospace;
+    font-size: 50px;
+    text-align: right;
 }
 
 .buttons {
@@ -27,8 +31,21 @@ body {
 
 button {
     flex: 1 25%;
+    font-family: monospace;
+    font-size: 20px;
+    height: 60px;
+    border: 1px solid black;
+    border-radius: 5px;
 }
 
 #zero {
     flex: 1 50%;
+}
+
+.modifier {
+    background-color: lightgray;
+}
+
+.operator {
+    background-color: orange;
 }

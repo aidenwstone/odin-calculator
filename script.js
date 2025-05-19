@@ -27,16 +27,20 @@ function operate(num1, num2, operator) {
     }
 }
 
+function updateDisplay(content, shouldAppend) {
+    (shouldAppend) ? display.textContent += content : display.textContent = content;
+}
+
 function buttonClicked(event) {
     const button = event.target;
     const content = button.textContent;
 
     if (button.classList.contains('number')) {
-        (display.textContent == '0' || display.textContent == operator) ? display.textContent = content : display.textContent += content;
+        (display.textContent == '0' || display.textContent == operator) ? updateDisplay(content) : updateDisplay(content, true);
         (operator == null) ? num1 = display.textContent : num2 = display.textContent;
     } 
     else if (button.classList.contains('operator')) {
-        display.textContent = content;
+        updateDisplay(content);
         operator = content; 
     }
 }

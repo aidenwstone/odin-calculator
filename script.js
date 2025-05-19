@@ -34,6 +34,10 @@ function buttonClicked(event) {
     if (button.classList.contains('number')) {
         display.textContent == '0' ? display.textContent = content : display.textContent += content;
         num1 = display.textContent;
+    } 
+    else if (button.classList.contains('operator')) {
+        display.textContent = content;
+        operator = content; 
     }
 }
 

@@ -40,9 +40,9 @@ function buttonClicked(event) {
 const display = document.querySelector('.display');
 const buttons = document.querySelectorAll('button');
 
-let num1;
-let num2;
-let operator;
+let num1 = null;
+let num2 = null;
+let operator = null;
 
 buttons.forEach((button) => {
     button:addEventListener('click', buttonClicked);

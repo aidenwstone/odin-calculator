@@ -32,8 +32,8 @@ function buttonClicked(event) {
     const content = button.textContent;
 
     if (button.classList.contains('number')) {
-        display.textContent == '0' ? display.textContent = content : display.textContent += content;
-        num1 = display.textContent;
+        (display.textContent == '0' || display.textContent == operator) ? display.textContent = content : display.textContent += content;
+        (operator == null) ? num1 = display.textContent : num2 = display.textContent;
     } 
     else if (button.classList.contains('operator')) {
         display.textContent = content;

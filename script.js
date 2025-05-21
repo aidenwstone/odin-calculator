@@ -37,7 +37,7 @@ function buttonClicked(event) {
 
     if (button.classList.contains('number')) {
         (display.textContent == '0' || display.textContent == operator) ? updateDisplay(content) : updateDisplay(content, true);
-        (operator == null) ? num1 = display.textContent : num2 = display.textContent;
+        (operator == null) ? num1 = Number(display.textContent) : num2 = Number(display.textContent);
     } 
     else if (button.classList.contains('operator')) {
         updateDisplay(content);

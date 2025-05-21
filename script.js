@@ -43,6 +43,12 @@ function buttonClicked(event) {
         updateDisplay(content);
         operator = content; 
     }
+    else if (content == 'AC') {
+        num1 = null;
+        num2 = null;
+        operator = null;
+        updateDisplay('0');
+    }
 }
 
 const display = document.querySelector('.display');

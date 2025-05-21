@@ -18,11 +18,11 @@ function operate(num1, num2, operator) {
     switch (operator) {
         case '+':
             return add(num1, num2);
-        case '-':
+        case '−':
             return subtract(num1, num2);
-        case '*':
+        case '×':
             return multiply(num1, num2);
-        case '/':
+        case '÷':
             return divide(num1, num2);
     }
 }
@@ -36,11 +36,19 @@ function buttonClicked(event) {
     const content = button.textContent;
 
     if (button.classList.contains('number')) {
-        (display.textContent == '0' || display.textContent == operator) ? updateDisplay(content) : updateDisplay(content, true);
+        if (operator && !num2) {
+            updateDisplay('0');
+        }
+        (display.textContent == '0') ? updateDisplay(content) : updateDisplay(content, true);
         (operator == null) ? num1 = Number(display.textContent) : num2 = Number(display.textContent);
     } 
     else if (button.classList.contains('operator')) {
-        updateDisplay(content);
+        if (num1 && num2) {
+            const result = operate(num1, num2, operator);
+            updateDisplay(result);
+            num1 = result;
+            num2 = null;
+        }
         operator = content; 
     }
     else if (content == 'AC') {

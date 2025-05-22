@@ -23,7 +23,7 @@ function operate(num1, num2, operator) {
         case '×':
             return multiply(num1, num2);
         case '÷':
-            return divide(num1, num2);
+            return (num2 == 0) ? 'Really?' : divide(num1, num2);
     }
 }
 
@@ -43,7 +43,7 @@ function buttonClicked(event) {
         (operator == null) ? num1 = Number(display.textContent) : num2 = Number(display.textContent);
     } 
     else if (button.classList.contains('operator')) {
-        if (num1 && num2) {
+        if (num1 != null && num2 != null) {
             const result = operate(num1, num2, operator);
             updateDisplay(result);
             num1 = result;

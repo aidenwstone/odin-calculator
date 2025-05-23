@@ -28,7 +28,37 @@ function operate(num1, num2, operator) {
 }
 
 function updateDisplay(content, shouldAppend) {
-    (shouldAppend) ? display.textContent += content : display.textContent = content;
+    if (!shouldAppend) {
+        display.textContent = content;
+    } 
+    else if (display.textContent.length < 9) {
+        display.textContent += content;
+    }
+}
+
+function updateNumber(newNum) {
+    if (operator && !num2) {
+        updateDisplay('0');
+    }
+    (display.textContent == '0') ? updateDisplay(newNum) : updateDisplay(newNum, true);
+    (num1 == null || operator == null) ? num1 = Number(display.textContent) : num2 = Number(display.textContent);
+}
+
+function updateOperator(newOperator) {
+    if (num1 != null && num2 != null) {
+        const result = operate(num1, num2, operator);
+        updateDisplay(result);
+        (isNaN(result)) ? num1 = null : num1 = result;
+        num2 = null;
+    }
+    operator = newOperator;
+}
+
+function clearDisplay() {
+    num1 = null;
+    num2 = null;
+    operator = null;
+    updateDisplay('0');
 }
 
 function buttonClicked(event) {
@@ -36,26 +66,13 @@ function buttonClicked(event) {
     const content = button.textContent;
 
     if (button.classList.contains('number')) {
-        if (operator && !num2) {
-            updateDisplay('0');
-        }
-        (display.textContent == '0') ? updateDisplay(content) : updateDisplay(content, true);
-        (operator == null) ? num1 = Number(display.textContent) : num2 = Number(display.textContent);
+        updateNumber(content);
     } 
     else if (button.classList.contains('operator')) {
-        if (num1 != null && num2 != null) {
-            const result = operate(num1, num2, operator);
-            updateDisplay(result);
-            num1 = result;
-            num2 = null;
-        }
-        operator = content; 
+        updateOperator(content);
     }
     else if (content == 'AC') {
-        num1 = null;
-        num2 = null;
-        operator = null;
-        updateDisplay('0');
+        clearDisplay();
     }
 }
 

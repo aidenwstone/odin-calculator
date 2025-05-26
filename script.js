@@ -27,31 +27,25 @@ function operate(num1, num2, operator) {
     }
 }
 
-function updateDisplay(content, shouldAppend) {
-    if (!shouldAppend) {
-        display.textContent = content;
-    } 
-    else if (display.textContent.length < 9) {
-        display.textContent += content;
-    }
+function updateDisplay(newContent) {
+    display.textContent = newContent;
 }
 
 function updateNumber(newNum) {
-    if (operator && !num2) {
-        updateDisplay('0');
+    if (operator == null) {
+        (num1 == null) ? num1 = newNum : num1 += newNum.toString();
+        updateDisplay(num1);
     }
-    (display.textContent == '0') ? updateDisplay(newNum) : updateDisplay(newNum, true);
-    (num1 == null || operator == null) ? num1 = Number(display.textContent) : num2 = Number(display.textContent);
+    else {
+        (num2 == null) ? num2 = newNum : num2 += newNum.toString();
+        updateDisplay(num2);
+    }
 }
 
 function updateOperator(newOperator) {
-    if (num1 != null && num2 != null) {
-        const result = operate(num1, num2, operator);
-        updateDisplay(result);
-        (isNaN(result)) ? num1 = null : num1 = result;
-        num2 = null;
+    if (num1 != null && newOperator != '=') {
+        operator = newOperator;
     }
-    operator = newOperator;
 }
 
 function clearDisplay() {

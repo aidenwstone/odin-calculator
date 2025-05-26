@@ -69,6 +69,13 @@ function buttonClicked(event) {
     if (button.classList.contains('number')) {
         updateNumber(content);
     } 
+    else if (content == '=') {
+        if (num1 != null && num2 != null) {
+            updateResult();
+            operator = null;
+            num1 = null;
+        }
+    }
     else if (button.classList.contains('operator')) {
         if (num1 != null && num2 != null) {
             updateResult();

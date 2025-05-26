@@ -31,6 +31,13 @@ function updateDisplay(newContent) {
     display.textContent = newContent;
 }
 
+function updateResult() {
+    const result = operate(num1, num2, operator);
+    num1 = Number(result);
+    num2 = null;
+    updateDisplay(result);
+}
+
 function updateNumber(newNum) {
     if (operator == null) {
         num1 = (num1 == null) ? Number(newNum) : Number(num1 + newNum.toString());
@@ -63,6 +70,9 @@ function buttonClicked(event) {
         updateNumber(content);
     } 
     else if (button.classList.contains('operator')) {
+        if (num1 != null && num2 != null) {
+            updateResult();
+        }
         updateOperator(content);
     }
     else if (content == 'AC') {

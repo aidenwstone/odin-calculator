@@ -33,11 +33,11 @@ function updateDisplay(newContent) {
 
 function updateNumber(newNum) {
     if (operator == null) {
-        (num1 == null) ? num1 = newNum : num1 += newNum.toString();
+        num1 = (num1 == null) ? Number(newNum) : Number(num1 + newNum.toString());
         updateDisplay(num1);
     }
     else {
-        (num2 == null) ? num2 = newNum : num2 += newNum.toString();
+        num2 = (num2 == null) ? Number(newNum) : Number(num2 + newNum.toString());
         updateDisplay(num2);
     }
 }

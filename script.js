@@ -52,11 +52,21 @@ function updateResult() {
 
 function updateNumber(newNum) {
     if (operator == null) {
-        num1 = (num1 == null) ? Number(newNum) : Number(num1 + newNum.toString());
+        if (num1 == null) {
+            num1 = Number(newNum);
+        }
+        else if (num1.toString().length < MAX_LENGTH) {
+            num1 = Number(num1 + newNum.toString());
+        }
         updateDisplay(num1);
     }
     else {
-        num2 = (num2 == null) ? Number(newNum) : Number(num2 + newNum.toString());
+        if (num2 == null) {
+            num2 = Number(newNum);
+        }
+        else if (num1.toString().length < MAX_LENGTH) {
+            num2 = Number(num2 + newNum.toString());
+        }
         updateDisplay(num2);
     }
 }

@@ -27,6 +27,15 @@ function operate(num1, num2, operator) {
     }
 }
 
+function modifyNumber(num, modifier) {
+    switch (modifier) {
+        case '+/−':
+            return -num;
+        case '%':
+            return num / 100;
+    }
+}
+
 function formatForDisplay(num) {
     let formattedNum = num;
     let length = MAX_LENGTH;
@@ -44,42 +53,42 @@ function updateDisplay(newContent) {
 }
 
 function updateResult() {
-    result = operate(num1, num2, operator);
-    num1 = Number(result);
-    num2 = null;
+    result = operate(Number(num1), Number(num2), operator);
+    num1 = result.toString();
+    num2 = '0';
     updateDisplay(result);
 }
 
 function updateNumber(newNum) {
     if (operator == null) {
-        if (num1 == null) {
-            num1 = Number(newNum);
+        if (num1 == '0') {
+            num1 = newNum;
         }
-        else if (num1.toString().length < MAX_LENGTH) {
-            num1 = Number(num1 + newNum.toString());
+        else if (num1.length < MAX_LENGTH) {
+            num1 = num1 + newNum;
         }
         updateDisplay(num1);
     }
     else {
-        if (num2 == null) {
-            num2 = Number(newNum);
+        if (num2 == '0') {
+            num2 = newNum;
         }
-        else if (num1.toString().length < MAX_LENGTH) {
-            num2 = Number(num2 + newNum.toString());
+        else if (num2.length < MAX_LENGTH) {
+            num2 = num2 + newNum;
         }
         updateDisplay(num2);
     }
 }
 
 function updateOperator(newOperator) {
-    if (num1 != null && newOperator != '=') {
+    if (num1 != '0' && newOperator != '=') {
         operator = newOperator;
     }
 }
 
 function clearDisplay() {
-    num1 = null;
-    num2 = null;
+    num1 = '0';
+    num2 = '0';
     operator = null;
     result = null;
     updateDisplay('0');
@@ -93,23 +102,37 @@ function buttonClicked(event) {
         updateNumber(content);
     } 
     else if (content == '=') {
-        if (num1 != null && num2 != null) {
+        if (num1 != '0' && num2 != '0') {
             updateResult();
             operator = null;
-            num1 = null;
+            num1 = '0';
         }
     }
     else if (button.classList.contains('operator')) {
-        if (num1 != null && num2 != null) {
+        if (num1 != '0' && num2 != '0') {
             updateResult();
         }
-        else if (num1 == null && result != null) {
-            updateNumber(result);
+        else if (num1 == '0' && result != null) {
+            updateNumber(result.toString());
         }
         updateOperator(content);
     }
     else if (content == 'AC') {
         clearDisplay();
+    }
+    else if (button.classList.contains('modifier')) {
+        if (num2 != '0') {
+            num2 = modifyNumber(num2, content).toString();
+            updateDisplay(num2);
+        }
+        else if (num1 != '0' && operator == null) {
+            num1 = modifyNumber(num1, content).toString();
+            updateDisplay(num1);
+        }
+        else if (result != null) {
+            result = modifyNumber(result, content);
+            updateDisplay(result);
+        }
     }
 }
 
@@ -117,8 +140,8 @@ const display = document.querySelector('.display');
 const buttons = document.querySelectorAll('button');
 const MAX_LENGTH = 9;
 
-let num1 = null;
-let num2 = null;
+let num1 = '0';
+let num2 = '0';
 let operator = null;
 let result = null;
 

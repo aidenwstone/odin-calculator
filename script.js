@@ -32,7 +32,7 @@ function updateDisplay(newContent) {
 }
 
 function updateResult() {
-    const result = operate(num1, num2, operator);
+    result = operate(num1, num2, operator);
     num1 = Number(result);
     num2 = null;
     updateDisplay(result);
@@ -59,6 +59,7 @@ function clearDisplay() {
     num1 = null;
     num2 = null;
     operator = null;
+    result = null;
     updateDisplay('0');
 }
 
@@ -80,6 +81,9 @@ function buttonClicked(event) {
         if (num1 != null && num2 != null) {
             updateResult();
         }
+        else if (num1 == null && result != null) {
+            updateNumber(result);
+        }
         updateOperator(content);
     }
     else if (content == 'AC') {
@@ -93,6 +97,7 @@ const buttons = document.querySelectorAll('button');
 let num1 = null;
 let num2 = null;
 let operator = null;
+let result = null;
 
 buttons.forEach((button) => {
     button:addEventListener('click', buttonClicked);

@@ -27,8 +27,20 @@ function operate(num1, num2, operator) {
     }
 }
 
+function formatForDisplay(num) {
+    let formattedNum = num;
+    let length = MAX_LENGTH;
+
+    while (formattedNum.toString().length > MAX_LENGTH) {
+        formattedNum = num.toPrecision(length);
+        length--;
+    }
+
+    return formattedNum;
+}
+
 function updateDisplay(newContent) {
-    display.textContent = newContent;
+    display.textContent = formatForDisplay(newContent);
 }
 
 function updateResult() {
@@ -93,6 +105,7 @@ function buttonClicked(event) {
 
 const display = document.querySelector('.display');
 const buttons = document.querySelectorAll('button');
+const MAX_LENGTH = 9;
 
 let num1 = null;
 let num2 = null;

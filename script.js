@@ -36,13 +36,45 @@ function modifyNumber(num, modifier) {
     }
 }
 
+function removeTrailingZeros(num) {
+    const lastZeroIndex = num.lastIndexOf('0');
+    const decimalIndex = num.indexOf('.');
+
+    if (lastZeroIndex != -1 && decimalIndex != -1) {
+        let pastChar = num[lastZeroIndex];
+        let currentChar;
+        let zeros = 1;
+
+        for (let i = lastZeroIndex - 1; i >= decimalIndex; i--) {
+            currentChar = num[i];
+            if (currentChar == '0' && pastChar == '0') {
+                zeros++;
+                pastChar = currentChar;
+            }
+            else {
+                num = num.split('');
+                (currentChar == '.') ? num.splice(i, zeros + 1) : num.splice(i + 1, zeros);
+                num = num.join('');
+                return num;
+            }
+        }
+    }
+    else {
+        return num;
+    }
+}
+
 function formatForDisplay(num) {
     let formattedNum = num;
     let length = MAX_LENGTH;
 
     while (formattedNum.toString().length > MAX_LENGTH) {
-        formattedNum = num.toPrecision(length);
+        formattedNum = Number(formattedNum).toPrecision(length);
         length--;
+
+        if (formattedNum.toString().length == MAX_LENGTH) {
+            formattedNum = removeTrailingZeros(formattedNum);
+        }
     }
 
     return formattedNum;

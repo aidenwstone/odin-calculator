@@ -80,6 +80,17 @@ function updateNumber(newNum) {
     }
 }
 
+function addDecimal() {
+    if (operator == null && num1.length < MAX_LENGTH - 1 && !num1.includes('.')) {
+        num1 = (num1 == '0') ? '0.' : num1 + '.';
+        updateDisplay(num1);
+    }
+    else if (operator != null && num2.length < MAX_LENGTH - 1 && !num2.includes('.')) {
+        num2 = (num2 == '0') ? '0.' : num2 + '.';
+        updateDisplay(num2);
+    }
+}
+
 function updateOperator(newOperator) {
     if (num1 != '0' && newOperator != '=') {
         operator = newOperator;
@@ -98,7 +109,10 @@ function buttonClicked(event) {
     const button = event.target;
     const content = button.textContent;
 
-    if (button.classList.contains('number')) {
+    if (content == '.') {
+        addDecimal();
+    }
+    else if (button.classList.contains('number')) {
         updateNumber(content);
     } 
     else if (content == '=') {
